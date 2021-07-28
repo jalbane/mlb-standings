@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/mlb-standings/static/css/main.ec6eef19.chunk.css",
+    "main.js": "/mlb-standings/static/js/main.1d913d57.chunk.js",
+    "main.js.map": "/mlb-standings/static/js/main.1d913d57.chunk.js.map",
+    "runtime-main.js": "/mlb-standings/static/js/runtime-main.d520fbeb.js",
+    "runtime-main.js.map": "/mlb-standings/static/js/runtime-main.d520fbeb.js.map",
+    "static/js/2.b0bee105.chunk.js": "/mlb-standings/static/js/2.b0bee105.chunk.js",
+    "static/js/2.b0bee105.chunk.js.map": "/mlb-standings/static/js/2.b0bee105.chunk.js.map",
+    "static/js/3.0cf39af3.chunk.js": "/mlb-standings/static/js/3.0cf39af3.chunk.js",
+    "static/js/3.0cf39af3.chunk.js.map": "/mlb-standings/static/js/3.0cf39af3.chunk.js.map",
+    "index.html": "/mlb-standings/index.html",
+    "static/css/main.ec6eef19.chunk.css.map": "/mlb-standings/static/css/main.ec6eef19.chunk.css.map",
+    "static/js/2.b0bee105.chunk.js.LICENSE.txt": "/mlb-standings/static/js/2.b0bee105.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d520fbeb.js",
+    "static/js/2.b0bee105.chunk.js",
+    "static/css/main.ec6eef19.chunk.css",
+    "static/js/main.1d913d57.chunk.js"
+  ]
+}
