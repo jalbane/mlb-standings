@@ -1,5 +1,5 @@
 import './App.css';
-import League from './League';
+import League from './components/League';
 {/*import Mlb from './components/Mlb'*/}
 
 

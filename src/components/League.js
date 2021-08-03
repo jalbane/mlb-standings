@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React,{useState, useEffect} from 'react';
+import Team from './Team';
 import { AiFillCaretUp, AiFillCaretDown} from "react-icons/ai";
-import Team from './Team'
+import Loader from 'react-loader-spinner';
 
-function League(){
+function League(props){
     const [teams, setTeams] = useState([])
     const [sortUp, setSortDirection] = useState({
         pct: true,
@@ -11,8 +12,9 @@ function League(){
         losses: true,
         team: false
     })
+    const [loading, setLoading] = useState(true)
     useEffect( () => {
-        fetch('https://api-mlb.herokuapp.com/', {
+        fetch(`https://api-mlb.herokuapp.com/league/${props.league}`, {
             method: 'GET',
             accept: "*/*"
         })
@@ -32,9 +34,10 @@ function League(){
                 streak = {item.summary.streak}
             />)
         setTeams(results)
+        setLoading(false)
         })
     },[])
-
+    
     function reorganize(key){
         let state = [...teams]
         state = state.sort( (a,b) => {
@@ -120,10 +123,13 @@ function League(){
         />)
         setTeams(state)
     }
-    return(
-        <div>
-            <table>
-                <thead>
+
+    return( 
+        <div> 
+            {loading ? <div style={{marginBottom: '15%'}}> Loading <Loader type="Revolvingdots" height={40}/></div>
+            :<table>
+                <thead><tr>{props.league === 0 ? <th colspan="7">American League</th>: <th colspan="7">National League</th>}</tr></thead>
+                <tbody>
                     <tr>
                         <td> Team <button onClick={reorganizeAlpha}>{sortUp.team ? <AiFillCaretUp />: <AiFillCaretDown />  } </button></td>
                         <td>Record</td>
@@ -133,9 +139,9 @@ function League(){
                         <td>Games Back <button onClick ={() => reorganize("gamesBack")}> {sortUp.gamesBack ? <AiFillCaretUp />: <AiFillCaretDown />  }</button> </td>
                         <td>Streak</td>
                     </tr>
-                </thead>
-                <tbody>{teams}</tbody>
-            </table>
+                    {teams}
+                </tbody>
+            </table>}   
         </div>
     )
 }
