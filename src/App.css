@@ -48,6 +48,8 @@ table{
   margin: 0 auto;
   width: 100%;
   font-size: 8px;
+  margin-top: 12.5px;
+  margin-bottom: 12.5px;
 }
 td{
   padding: 5px 0px;
@@ -80,6 +82,7 @@ h3{
   margin: 0 auto; 
   width: 50%;
   font-weight: 400;
+  margin-top: 25px;
 }
 
 @media only screen and (min-width: 359px) {
@@ -145,5 +148,8 @@ h3{
   td{
     min-width: 80px;
   }
-
+  h3{
+    font-size: 20px;
+    font-weight: 700;
+  }
 }

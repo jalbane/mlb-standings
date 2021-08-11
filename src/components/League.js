@@ -3,45 +3,69 @@ import Team from './Team';
 import { AiFillCaretUp, AiFillCaretDown} from "react-icons/ai";
 import Loader from 'react-loader-spinner';
 
-function League(props){
-    const [teams, setTeams] = useState([])
-    const [sortUp, setSortDirection] = useState({
-        pct: true,
-        gamesBack: true,
-        wins: true,
-        losses: true,
-        team: false
+function League(){
+    const [teams, setTeams] = useState({
+        american: [
+
+        ],
+        national: [
+
+        ]
+    })
+    const [sortDirection, setSortDirection] = useState({
+        american: {    
+            pct: true,
+            gamesBack: true,
+            wins: false,
+            losses: true,
+            team: false
+        },
+        national: {    
+            pct: true,
+            gamesBack: true,
+            wins: false,
+            losses: true,
+            team: false
+        }
+
     })
     const [loading, setLoading] = useState(true)
     useEffect( () => {
-        fetch(`https://api-mlb.herokuapp.com/league/${props.league}`, {
+        let results
+        fetch(`https://api-mlb.herokuapp.com/`, {
             method: 'GET',
             accept: "*/*"
         })
         .then(res => res.json())
         .then(data => {
-            let results = data.map(  (item) => 
-            <Team 
-                key = {item.teamId}
-                teamId = {item.teamId} 
-                team = {item.team} 
-                league = {item.league}
-                record = {item.summary.record}
-                wins = {item.summary.wins}
-                losses = {item.summary.losses}
-                pct = {item.summary.pct}
-                gamesBack = {item.summary.gamesBack}
-                streak = {item.summary.streak}
-            />)
-        setTeams(results)
-        setLoading(false)
+            results = data.map(  (item) => 
+                <Team 
+                    key = {item.teamId}
+                    teamId = {item.teamId} 
+                    team = {item.team} 
+                    league = {item.league}
+                    record = {item.summary.record}
+                    wins = {item.summary.wins}
+                    losses = {item.summary.losses}
+                    pct = {item.summary.pct}
+                    gamesBack = {item.summary.gamesBack}
+                    streak = {item.summary.streak}
+                />)
+            results = results.sort( (a,b) => {return a.props.league - b.props.league} )
+            let resultsAmerican = results.slice(0, 15)
+            let resultsNational = results.slice(-15)
+            setTeams({
+                american: resultsAmerican,
+                national: resultsNational
+            })
+            setLoading(false)
         })
     },[])
     
-    function reorganize(key){
-        let state = [...teams]
+    function reorganize(key, league){
+        let state = [...teams[`${league}`]]
         state = state.sort( (a,b) => {
-            if (sortUp[`${key}`]){
+            if (sortDirection[`${league}`].[`${key}`]){
                 return b.props[`${key}`] - a.props[`${key}`] 
             }
             else{
@@ -50,31 +74,47 @@ function League(props){
         })
         let value
         if (key === "pct"){
-            value = sortUp[`${key}`]
+            value = sortDirection[`${league}`].pct
             setSortDirection( (prevState)=> ({
                 ...prevState,
-                pct: !value
+                [`${league}`]:
+                {
+                    ...prevState[`${league}`],
+                    pct: !value
+                }
             }))
         }
         if (key === "gamesBack"){
-            value = sortUp[`${key}`]
+            value = sortDirection[`${league}`].gamesBack
             setSortDirection( (prevState)=> ({
                 ...prevState,
-                gamesBack: !value
+                [`${league}`]:
+                {
+                    ...prevState[`${league}`],
+                    gamesBack: !value
+                }
             }))
         }
         if (key === "wins"){
-            value = sortUp[`${key}`]
+            value = sortDirection[`${league}`].wins
             setSortDirection( (prevState)=> ({
                 ...prevState,
-                wins: !value
+                [`${league}`]:
+                {
+                    ...prevState[`${league}`],
+                    wins: !value
+                }
             }))
         }
         if (key === "losses"){
-            value = sortUp[`${key}`]
+            value = sortDirection[`${league}`].losses
             setSortDirection( (prevState)=> ({
                 ...prevState,
-                losses: !value
+                [`${league}`]:
+                {
+                    ...prevState[`${league}`],
+                    losses: !value
+                }
             }))
         }
         state = state.map((item) => 
@@ -90,24 +130,42 @@ function League(props){
             gamesBack = {item.props.gamesBack}
             streak = {item.props.streak}
         />)
-        setTeams(state)
-
+        if(league === 'american'){
+            setTeams( (prevState) => ({
+                ...prevState,
+                american: state
+            }))
+        }
+        if(league === 'national'){
+            setTeams( (prevState) => ({
+                ...prevState,
+                national: state
+            }))
+        }
     }
 
-    function reorganizeAlpha(){
-        let state = [...teams]
+    function reorganizeAlpha(league){
+        let state = [...teams[`${league}`]]
         state = state.sort( (a,b) => {
-            if (sortUp.team){
+            if (sortDirection[`${league}`].team){
                 return a.props.team.localeCompare(b.props.team)
             }else{
                 return b.props.team.localeCompare(a.props.team)
             }
         })
-        let value = sortUp.team
-        setSortDirection(prevState => ({
+        let value = sortDirection[`${league}`].team
+
+        setSortDirection( (prevState) => ({
             ...prevState,
-            team: !value 
+            [`${league}`]:{
+                pct: prevState,
+                gamesBack: prevState,
+                wins: prevState,
+                losses: prevState,
+                team: !value 
+            }
         }))
+        
         state = state.map((item) => 
         <Team 
             key = {item.props.teamId}
@@ -121,27 +179,59 @@ function League(props){
             gamesBack = {item.props.gamesBack}
             streak = {item.props.streak}
         />)
-        setTeams(state)
+
+        if(league === 'american'){
+            setTeams( (prevState) => ({
+                ...prevState,
+                american: state
+            }))
+        }
+        if(league === 'national'){
+            setTeams( (prevState) => ({
+                ...prevState,
+                national: state
+            }))
+        }
     }
 
     return( 
         <div> 
-            {loading ? <div style={{marginBottom: '15%'}}> Loading <Loader type="Revolvingdots" height={40}/></div>
-            :<table>
-                <thead><tr>{props.league === 0 ? <th colspan="7">American League</th>: <th colspan="7">National League</th>}</tr></thead>
-                <tbody>
-                    <tr>
-                        <td> Team <button onClick={reorganizeAlpha}>{sortUp.team ? <AiFillCaretUp />: <AiFillCaretDown />  } </button></td>
-                        <td>Record</td>
-                        <td>Wins <button onClick ={() => reorganize("wins")}> {sortUp.wins ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
-                        <td>Losses <button onClick ={() => reorganize("losses")}> {sortUp.losses ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
-                        <td>Win % <button onClick ={() => reorganize("pct")}> {sortUp.pct ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
-                        <td>Games Back <button onClick ={() => reorganize("gamesBack")}> {sortUp.gamesBack ? <AiFillCaretUp />: <AiFillCaretDown />  }</button> </td>
-                        <td>Streak</td>
-                    </tr>
-                    {teams}
-                </tbody>
-            </table>}   
+            {loading 
+            ? <div style={{marginTop: '5%'}}> Loading <Loader color={'black'} height={60}/></div>
+            :
+            <div>
+                <table>
+                    <thead><tr><th colSpan="7">American League</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>Team<button onClick={() => reorganizeAlpha("american")}>{sortDirection.american.team ? <AiFillCaretUp />: <AiFillCaretDown />  } </button></td>
+                            <td>Record</td>
+                            <td>Wins <button onClick ={() => reorganize("wins", "american")}> {sortDirection.american.wins ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Losses <button onClick ={() => reorganize("losses", "american")}> {sortDirection.american.losses ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Win % <button onClick ={() => reorganize("pct", "american")}> {sortDirection.american.pct ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Games Back <button onClick ={() => reorganize("gamesBack", "american")}> {sortDirection.american.gamesBack ? <AiFillCaretUp />: <AiFillCaretDown />  }</button> </td>
+                            <td>Streak</td>
+                        </tr>
+                        {teams.american}
+                    </tbody>
+                </table>
+                <table>
+                    <thead><tr><th colSpan="7">National League</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>Team<button onClick={() => reorganizeAlpha("national")}>{sortDirection.national.team ? <AiFillCaretUp />: <AiFillCaretDown />  } </button></td>
+                            <td>Record</td>
+                            <td>Wins <button onClick ={() => reorganize("wins", "national")}> {sortDirection.national.wins ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Losses <button onClick ={() => reorganize("losses", "national")}> {sortDirection.national.losses ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Win % <button onClick ={() => reorganize("pct", "national")}> {sortDirection.national.pct ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Games Back <button onClick ={() => reorganize("gamesBack", "national")}> {sortDirection.national.gamesBack ? <AiFillCaretUp />: <AiFillCaretDown />  }</button> </td>
+                            <td>Streak</td>
+                        </tr>
+                        {teams.national}
+                    </tbody>
+                </table>
+            </div>
+            }   
         </div>
     )
 }
