@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/mlb-standings/static/css/main.977d28dc.chunk.css",
-    "main.js": "/mlb-standings/static/js/main.d2a8e8c5.chunk.js",
-    "main.js.map": "/mlb-standings/static/js/main.d2a8e8c5.chunk.js.map",
-    "runtime-main.js": "/mlb-standings/static/js/runtime-main.26fd52a6.js",
-    "runtime-main.js.map": "/mlb-standings/static/js/runtime-main.26fd52a6.js.map",
-    "static/js/2.c0c8095b.chunk.js": "/mlb-standings/static/js/2.c0c8095b.chunk.js",
-    "static/js/2.c0c8095b.chunk.js.map": "/mlb-standings/static/js/2.c0c8095b.chunk.js.map",
-    "static/js/3.c9efaa0f.chunk.js": "/mlb-standings/static/js/3.c9efaa0f.chunk.js",
-    "static/js/3.c9efaa0f.chunk.js.map": "/mlb-standings/static/js/3.c9efaa0f.chunk.js.map",
+    "main.css": "/mlb-standings/static/css/main.98569ca1.chunk.css",
+    "main.js": "/mlb-standings/static/js/main.8311b7c0.chunk.js",
+    "main.js.map": "/mlb-standings/static/js/main.8311b7c0.chunk.js.map",
+    "runtime-main.js": "/mlb-standings/static/js/runtime-main.1410a3c9.js",
+    "runtime-main.js.map": "/mlb-standings/static/js/runtime-main.1410a3c9.js.map",
+    "static/js/2.608fd2a0.chunk.js": "/mlb-standings/static/js/2.608fd2a0.chunk.js",
+    "static/js/2.608fd2a0.chunk.js.map": "/mlb-standings/static/js/2.608fd2a0.chunk.js.map",
+    "static/js/3.ecb381a5.chunk.js": "/mlb-standings/static/js/3.ecb381a5.chunk.js",
+    "static/js/3.ecb381a5.chunk.js.map": "/mlb-standings/static/js/3.ecb381a5.chunk.js.map",
     "index.html": "/mlb-standings/index.html",
-    "static/css/main.977d28dc.chunk.css.map": "/mlb-standings/static/css/main.977d28dc.chunk.css.map",
-    "static/js/2.c0c8095b.chunk.js.LICENSE.txt": "/mlb-standings/static/js/2.c0c8095b.chunk.js.LICENSE.txt"
+    "static/css/main.98569ca1.chunk.css.map": "/mlb-standings/static/css/main.98569ca1.chunk.css.map",
+    "static/js/2.608fd2a0.chunk.js.LICENSE.txt": "/mlb-standings/static/js/2.608fd2a0.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.26fd52a6.js",
-    "static/js/2.c0c8095b.chunk.js",
-    "static/css/main.977d28dc.chunk.css",
-    "static/js/main.d2a8e8c5.chunk.js"
+    "static/js/runtime-main.1410a3c9.js",
+    "static/js/2.608fd2a0.chunk.js",
+    "static/css/main.98569ca1.chunk.css",
+    "static/js/main.8311b7c0.chunk.js"
   ]
 }
