@@ -1,12 +1,22 @@
 .App {
   text-align: center;
   width: 100%;
+  height: 100%;
 }
 
 body, html{
   padding: 0;
   margin: 0;
   width: 100%;
+  height: 100%;
+}
+
+a{
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 20px;
+  width: 100%;
+  margin: 0px 20px;
 }
 
 .App-logo {
@@ -56,10 +66,6 @@ td{
   max-width: 50px;
 }
 
-/*tr:nth-child(even){
-  background-color: whitesmoke;
-}*/
-
 button{
   background-color: transparent;
   border-style: none;
@@ -85,6 +91,72 @@ h3{
   margin-top: 25px;
 }
 
+.layout-container{
+  margin: auto;  
+  margin-top: 2%;
+  width: 90%;
+  overflow-y: scroll;
+  height: 75vh;
+}
+
+.game-container{
+  display: inline-grid; 
+  width: 100%;
+  box-shadow: 0px 2px 2px;
+  margin: 3px 0px;
+}
+
+.game-container:nth-child(even){
+  background-color: #F8F9FA;
+}
+
+.stadium-date-container > div:first-child{
+  float: left;
+  display: inline;
+}
+.stadium-date-container > div:nth-child(2){
+  display: inline;
+  float: right;
+}
+
+.winner-container > strong > div{
+  display: inline;
+}
+
+.winner-container > strong{
+  margin: 0;
+}
+
+.loser-container > div{
+  display: inline;
+}
+
+input{
+  display: inline;
+  width: 40%;
+  text-align: center;
+  margin: 20px 0px;
+}
+
+button.navbar-toggler{
+  margin: 0px 15px;
+  color: rgba(0,0, 0, 1);
+}
+
+.navbar-light .navbar-nav .nav-link{
+  color: black;
+}
+
+.navbar > .container {
+  width:auto!important;
+}
+
+.nav-link{
+  width: auto;
+  margin: 5px 0px;
+  padding: 0px;
+}
+
 @media only screen and (min-width: 359px) {
   table{
     font-size: 10px;
@@ -95,16 +167,6 @@ h3{
   th{
     font-size: 12px;
   }
-}
-
-@media only screen and (min-width: 359px) {
-  table{
-    font-size: 10px;
-  }
-  td{
-    max-width: 50px;
-  }
-
 }
 
 @media only screen and (min-width: 599px) {
@@ -139,6 +201,10 @@ h3{
   h3{
     font-size: 18px;
   }
+  .layout-container{
+    width: 50%;
+  }
+
 }
 
 @media only screen and (min-width: 1023px) {
@@ -151,5 +217,26 @@ h3{
   h3{
     font-size: 20px;
     font-weight: 700;
+  }  
+  .game-container{
+    width: 48%;
+    margin: 1%;
+    box-shadow: 0px 2px 2px;
+    border-radius: 5px;
+    height: 125px;    
+ 
+  }
+  .game-container:nth-child(n){
+    background-color: white;
+  }
+  .stadium-date-container{
+    background-color: #F8F9FA;
+    height: 75%;
+  }
+  .stadium-date-container > div{
+    padding: 5px 0px;
+  }
+  input{
+    width: 30%;
   }
 }
