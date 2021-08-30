@@ -4,7 +4,6 @@ import {BrowserRouter, Switch, Link, Route} from "react-router-dom";
 import Games from './components/Games';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import Container from 'react-bootstrap/Container'
 
 function App() {
   return (
@@ -14,8 +13,8 @@ function App() {
             <Navbar.Toggle/>
             <Navbar.Collapse className="nav-collapse">
             <Nav>
-              <Nav.Link href = "/mlb-standings"> Standings </Nav.Link>
-              <Nav.Link href = "/games"> Regular Season Final Scores </Nav.Link>
+              <Nav.Link as = {Link} to = "/mlb-standings"> Standings </Nav.Link>
+              <Nav.Link as = {Link} to = "/mlb-standings/games"> Regular Season Final Scores </Nav.Link>
               </Nav></Navbar.Collapse>
             
           </Navbar>
@@ -23,7 +22,7 @@ function App() {
           <Route exact path = "/mlb-standings">
             <League />
           </Route>
-          <Route exact path = "/games">
+          <Route exact path = "/mlb-standings/games">
             <Games />
           </Route>
         </Switch>

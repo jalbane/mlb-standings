@@ -35,10 +35,10 @@ function Games(){
         setFilteredGameRecap(completeGameRecap)
         let [date, stadium, winner, winnerRuns, loser, loserRuns] = Object.keys(completeGameRecap[0].props)
         let tempData = completeGameRecap.filter( item => {
-            if (item.props[winner].toLowerCase().includes(e.target.value) 
-                || item.props[loser].toLowerCase().includes(e.target.value)
-                || item.props[date].includes(e.target.value)
-                || item.props[stadium].toLowerCase().includes(e.target.value)
+            if (item.props[winner].toLowerCase().includes(e.target.value.toLowerCase()) 
+                || item.props[loser].toLowerCase().includes(e.target.value.toLowerCase())
+                || item.props[date].includes(e.target.value.toLowerCase())
+                || item.props[stadium].toLowerCase().includes(e.target.value.toLowerCase())
             ){
                 return (
                     <CompletedGames 
