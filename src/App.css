@@ -110,10 +110,6 @@ h3{
   background-color: #F8F9FA;
 }
 
-.navbar{
-  
-}
-
 .stadium-date-container > div:first-child{
   float: left;
   display: inline;
@@ -157,8 +153,7 @@ button.navbar-toggler{
 
 .nav-link{
   width: auto;
-  margin: 5px 0px;
-  padding: 0px;
+  margin: 5px 0px 5px 40px;
 }
 
 @media only screen and (min-width: 359px) {

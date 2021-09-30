@@ -60,7 +60,6 @@ function Games(){
             {loading
                 ?<div> loading </div> 
                 : filteredGameRecap 
-                    
                     ?    
                     <div >   
                         <input onChange = {handleSearch} placeholder="Search for Teams, Stadiums or dates (mm-dd)"/>
