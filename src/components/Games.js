@@ -62,7 +62,7 @@ function Games(){
                 : filteredGameRecap 
                     ?    
                     <div >   
-                        <input onChange = {handleSearch} placeholder="Search for Teams, Stadiums or dates (mm-dd)"/>
+                        <input onChange = {handleSearch} placeholder="Search for teams, stadiums or dates (mm-dd)"/>
                         <div className = "layout-container"> 
                             {filteredGameRecap} 
                         </div> 

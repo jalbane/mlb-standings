@@ -61,62 +61,8 @@ function League(){
             setLoading(false)
         })
     },[])
-    
-    function reorganize(key, league){
-        let state = [...teams[`${league}`]]
-        state = state.sort( (a,b) => {
-            if (sortDirection[`${league}`].[`${key}`]){
-                return b.props[`${key}`] - a.props[`${key}`] 
-            }
-            else{
-                return a.props[`${key}`] - b.props[`${key}`]
-            }
-        })
-        let value
-        if (key === "pct"){
-            value = sortDirection[`${league}`].pct
-            setSortDirection( (prevState)=> ({
-                ...prevState,
-                [`${league}`]:
-                {
-                    ...prevState[`${league}`],
-                    pct: !value
-                }
-            }))
-        }
-        if (key === "gamesBack"){
-            value = sortDirection[`${league}`].gamesBack
-            setSortDirection( (prevState)=> ({
-                ...prevState,
-                [`${league}`]:
-                {
-                    ...prevState[`${league}`],
-                    gamesBack: !value
-                }
-            }))
-        }
-        if (key === "wins"){
-            value = sortDirection[`${league}`].wins
-            setSortDirection( (prevState)=> ({
-                ...prevState,
-                [`${league}`]:
-                {
-                    ...prevState[`${league}`],
-                    wins: !value
-                }
-            }))
-        }
-        if (key === "losses"){
-            value = sortDirection[`${league}`].losses
-            setSortDirection( (prevState)=> ({
-                ...prevState,
-                [`${league}`]:
-                {
-                    ...prevState[`${league}`],
-                    losses: !value
-                }
-            }))
-        }
+
+    function mapStateToDummyComponent(state, league){
         state = state.map((item) => 
         <Team 
             key = {item.props.teamId}
@@ -144,6 +90,84 @@ function League(){
         }
     }
 
+    function reorganizeWins(league){
+        let state = [...teams[`${league}`]]
+        state = state.sort( (a,b) => {
+            return b.props.wins - a.props.wins 
+        })
+        if (!sortDirection[`${league}`].wins)
+            state.reverse()
+        
+        setSortDirection( (prevState)=> ({
+            ...prevState,
+            [`${league}`]:
+            {
+                ...prevState[`${league}`],
+                wins: !prevState[`${league}`].wins
+            }
+        }))
+
+        mapStateToDummyComponent(state, league)
+    }
+
+    function reorganizeLosses(league){
+        let state = [...teams[`${league}`]]
+        state = state.sort( (a,b) => {
+            return b.props.losses - a.props.losses 
+        })
+        if (!sortDirection[`${league}`].losses)
+            state.reverse()
+        
+        setSortDirection( (prevState)=> ({
+            ...prevState,
+            [`${league}`]:
+            {
+                ...prevState[`${league}`],
+                losses: !prevState[`${league}`].losses
+            }
+        }))
+
+        mapStateToDummyComponent(state, league)
+    }
+    
+    function reorganizeWinPercentage(league){
+        let state = [...teams[`${league}`]]
+        state = state.sort( (a,b) => {
+            return b.props.pct - a.props.pct 
+        })
+        if (!sortDirection[`${league}`].pct)
+            state.reverse()
+        
+        setSortDirection( (prevState)=> ({
+            ...prevState,
+            [`${league}`]:
+            {
+                ...prevState[`${league}`],
+                pct: !prevState[`${league}`].pct
+            }
+        }))
+        mapStateToDummyComponent(state, league)
+    }
+
+    function reorganizeGamesBack(league){
+        let state = [...teams[`${league}`]]
+        state = state.sort( (a,b) => {
+            return b.props.gamesBack - a.props.gamesBack 
+        })
+        if (!sortDirection[`${league}`].gamesBack)
+            state.reverse()
+
+        setSortDirection( (prevState)=> ({
+            ...prevState,
+            [`${league}`]:
+            {
+                ...prevState[`${league}`],
+                gamesBack: !prevState[`${league}`].gamesBack
+            }
+        }))
+        mapStateToDummyComponent(state, league)
+    }
+
     function reorganizeAlpha(league){
         let state = [...teams[`${league}`]]
         state = state.sort( (a,b) => {
@@ -153,45 +177,17 @@ function League(){
                 return b.props.team.localeCompare(a.props.team)
             }
         })
-        let value = sortDirection[`${league}`].team
 
         setSortDirection( (prevState) => ({
             ...prevState,
-            [`${league}`]:{
-                pct: prevState,
-                gamesBack: prevState,
-                wins: prevState,
-                losses: prevState,
-                team: !value 
+            [`${league}`]:
+            {
+                ...prevState[`${league}`],
+                team: !prevState[`${league}`].team
             }
         }))
         
-        state = state.map((item) => 
-        <Team 
-            key = {item.props.teamId}
-            teamId = {item.props.teamId} 
-            team = {item.props.team} 
-            league = {item.props.league}
-            record = {item.props.record}
-            wins = {item.props.wins}
-            losses = {item.props.losses}
-            pct = {item.props.pct}
-            gamesBack = {item.props.gamesBack}
-            streak = {item.props.streak}
-        />)
-
-        if(league === 'american'){
-            setTeams( (prevState) => ({
-                ...prevState,
-                american: state
-            }))
-        }
-        if(league === 'national'){
-            setTeams( (prevState) => ({
-                ...prevState,
-                national: state
-            }))
-        }
+        mapStateToDummyComponent(state, league)
     }
 
     return( 
@@ -206,10 +202,10 @@ function League(){
                         <tr>
                             <td>Team<button onClick={() => reorganizeAlpha("american")}>{sortDirection.american.team ? <AiFillCaretUp />: <AiFillCaretDown />  } </button></td>
                             <td>Record</td>
-                            <td>Wins <button onClick ={() => reorganize("wins", "american")}> {sortDirection.american.wins ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
-                            <td>Losses <button onClick ={() => reorganize("losses", "american")}> {sortDirection.american.losses ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
-                            <td>Win % <button onClick ={() => reorganize("pct", "american")}> {sortDirection.american.pct ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
-                            <td>Games Back <button onClick ={() => reorganize("gamesBack", "american")}> {sortDirection.american.gamesBack ? <AiFillCaretUp />: <AiFillCaretDown />  }</button> </td>
+                            <td>Wins <button onClick ={() => reorganizeWins("american")}> {sortDirection.american.wins ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Losses <button onClick ={() => reorganizeLosses("american")}> {sortDirection.american.losses ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Win % <button onClick ={() => reorganizeWinPercentage("american")}> {sortDirection.american.pct ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Games Back <button onClick ={() => reorganizeGamesBack("american")}> {sortDirection.american.gamesBack ? <AiFillCaretUp />: <AiFillCaretDown />  }</button> </td>
                             <td>Streak</td>
                         </tr>
                         {teams.american}
@@ -221,10 +217,10 @@ function League(){
                         <tr>
                             <td>Team<button onClick={() => reorganizeAlpha("national")}>{sortDirection.national.team ? <AiFillCaretUp />: <AiFillCaretDown />  } </button></td>
                             <td>Record</td>
-                            <td>Wins <button onClick ={() => reorganize("wins", "national")}> {sortDirection.national.wins ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
-                            <td>Losses <button onClick ={() => reorganize("losses", "national")}> {sortDirection.national.losses ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
-                            <td>Win % <button onClick ={() => reorganize("pct", "national")}> {sortDirection.national.pct ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
-                            <td>Games Back <button onClick ={() => reorganize("gamesBack", "national")}> {sortDirection.national.gamesBack ? <AiFillCaretUp />: <AiFillCaretDown />  }</button> </td>
+                            <td>Wins <button onClick ={() => reorganizeWins("national")}> {sortDirection.national.wins ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Losses <button onClick ={() => reorganizeLosses("national")}> {sortDirection.national.losses ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Win % <button onClick ={() => reorganizeWinPercentage("national")}> {sortDirection.national.pct ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Games Back <button onClick ={() => reorganizeGamesBack("national")}> {sortDirection.national.gamesBack ? <AiFillCaretUp />: <AiFillCaretDown />  }</button> </td>
                             <td>Streak</td>
                         </tr>
                         {teams.national}
