@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import DisplayTeam from './DisplayTeam';
+import DisplayTeam from '../components/DisplayTeam';
 import { AiFillCaretUp, AiFillCaretDown} from "react-icons/ai";
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';

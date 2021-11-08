@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect} from 'react';
-import CompletedGames from './CompletedGames';
+import DisplayGame from '../components/DisplayGame';
 
 function FinalScores(){
     const [completeGameRecap, setCompleteGameRecap] = useState()
@@ -15,7 +15,7 @@ function FinalScores(){
         })
         .then(res => res.json())
         .then(data => {
-            results = data.map( (item)=> <CompletedGames 
+            results = data.map( (item)=> <DisplayGame 
                 key = {item._id}
                 date = {item.date}
                 stadium = {item.stadium}
@@ -41,7 +41,7 @@ function FinalScores(){
                 || item.props[stadium].toLowerCase().includes(e.target.value.toLowerCase())
             ){
                 return (
-                    <CompletedGames 
+                    <DisplayGame 
                         key = {item.key}
                         date = {item.props.date}
                         stadium = {item.props.stadium}

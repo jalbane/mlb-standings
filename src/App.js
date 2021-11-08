@@ -1,7 +1,7 @@
 import './App.css';
-import Main from './components/Main';
+import Main from './containers/Main.js';
 import {HashRouter, Switch, Link, Route} from "react-router-dom";
-import FinalScores from './components/FinalScores';
+import FinalScores from './containers/FinalScores.js';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 

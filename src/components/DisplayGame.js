@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CompletedGames(props){
+function DisplayGame(props){
     let [formatDate, ...rest] = props.date.split('T')[0].split('-')
 
     return (
@@ -21,6 +21,6 @@ function CompletedGames(props){
     )
 }
 
-export default CompletedGames;
+export default DisplayGame;
 
 /**/
