@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import CompletedGames from './CompletedGames';
 
-function Games(){
+function FinalScores(){
     const [completeGameRecap, setCompleteGameRecap] = useState()
     const [filteredGameRecap, setFilteredGameRecap] = useState()
     const [loading, setLoading] = useState(true)
@@ -79,4 +79,4 @@ function Games(){
     )
 }
 
-export default Games;
+export default FinalScores;

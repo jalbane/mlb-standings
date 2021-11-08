@@ -58,8 +58,6 @@ table{
   margin: 0 auto;
   width: 100%;
   font-size: 8px;
-  margin-top: 12.5px;
-  margin-bottom: 12.5px;
 }
 td{
   padding: 5px 0px;
@@ -153,7 +151,6 @@ button.navbar-toggler{
 
 .nav-link{
   width: auto;
-  margin: 5px 0px 5px 40px;
 }
 
 @media only screen and (min-width: 359px) {
@@ -209,6 +206,9 @@ button.navbar-toggler{
 @media only screen and (min-width: 1023px) {
   table{
     width: 50%;
+  }
+  .nav-link{
+    margin: 5px 0px 5px 40px;
   }
   td{
     min-width: 80px;

@@ -1,7 +1,7 @@
 import './App.css';
-import League from './components/League';
+import Main from './components/Main';
 import {HashRouter, Switch, Link, Route} from "react-router-dom";
-import Games from './components/Games';
+import FinalScores from './components/FinalScores';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
@@ -20,10 +20,10 @@ function App() {
           </Navbar>
         <Switch>
           <Route exact path = "/">
-            <League />
+            <Main />
           </Route>
           <Route path = "/games">
-            <Games />
+            <FinalScores />
           </Route>
         </Switch>
       </HashRouter>

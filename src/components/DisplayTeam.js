@@ -1,13 +1,12 @@
 import React from 'react';
 
-function Team(props){
+function DisplayTeam(props){
 
 
     let fixedGamesBack = props.gamesBack.toFixed(1)
     return (
         <tr>
             <td>{props.team}</td>
-            <td>{props.record}</td>
             <td>{props.wins}</td>
             <td>{props.losses}</td>
             <td>{props.pct.toFixed(3)}</td>
@@ -18,4 +17,4 @@ function Team(props){
     
 }
 
-export default Team;
+export default DisplayTeam;

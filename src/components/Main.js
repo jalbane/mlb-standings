@@ -1,9 +1,36 @@
 import React,{useState, useEffect} from 'react';
-import Team from './Team';
+import DisplayTeam from './DisplayTeam';
 import { AiFillCaretUp, AiFillCaretDown} from "react-icons/ai";
 import Loader from 'react-loader-spinner';
+import styled from 'styled-components';
 
-function League(){
+const Wrapper = styled.div`
+    margin: 0 auto;
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    & table {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    & table:nth-child(2){
+        margin-top: 2%;
+    }
+
+    & table > thead > tr > th{
+        background-color: #BF0D3E;
+        color: white;
+        padding-left: 25px;
+    }
+
+    & table:nth-child(2) > thead > tr > th{
+        background-color: #041E42;
+    }
+
+`
+
+function Main(){
     const [teams, setTeams] = useState({
         american: [
 
@@ -39,7 +66,7 @@ function League(){
         .then(res => res.json())
         .then(data => {
             results = data.map(  (item) => 
-                <Team 
+                <DisplayTeam 
                     key = {item.teamId}
                     teamId = {item.teamId} 
                     team = {item.team} 
@@ -64,7 +91,7 @@ function League(){
 
     function mapStateToDummyComponent(state, league){
         state = state.map((item) => 
-        <Team 
+        <DisplayTeam 
             key = {item.props.teamId}
             teamId = {item.props.teamId} 
             team = {item.props.team} 
@@ -191,17 +218,20 @@ function League(){
     }
 
     return( 
-        <div> 
+        <Wrapper> 
             {loading 
             ? <div style={{marginTop: '5%'}}> Loading <Loader color={'black'} height={60}/></div>
             :
             <div>
                 <table>
-                    <thead><tr><th colSpan="7">American League</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th colSpan="6">American League</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <tr>
                             <td>Team<button onClick={() => reorganizeAlpha("american")}>{sortDirection.american.team ? <AiFillCaretUp />: <AiFillCaretDown />  } </button></td>
-                            <td>Record</td>
                             <td>Wins <button onClick ={() => reorganizeWins("american")}> {sortDirection.american.wins ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
                             <td>Losses <button onClick ={() => reorganizeLosses("american")}> {sortDirection.american.losses ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
                             <td>Win % <button onClick ={() => reorganizeWinPercentage("american")}> {sortDirection.american.pct ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
@@ -212,11 +242,10 @@ function League(){
                     </tbody>
                 </table>
                 <table>
-                    <thead><tr><th colSpan="7">National League</th></tr></thead>
+                    <thead><tr><th colSpan="6">National League</th></tr></thead>
                     <tbody>
                         <tr>
                             <td>Team<button onClick={() => reorganizeAlpha("national")}>{sortDirection.national.team ? <AiFillCaretUp />: <AiFillCaretDown />  } </button></td>
-                            <td>Record</td>
                             <td>Wins <button onClick ={() => reorganizeWins("national")}> {sortDirection.national.wins ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
                             <td>Losses <button onClick ={() => reorganizeLosses("national")}> {sortDirection.national.losses ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
                             <td>Win % <button onClick ={() => reorganizeWinPercentage("national")}> {sortDirection.national.pct ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
@@ -228,8 +257,8 @@ function League(){
                 </table>
             </div>
             }   
-        </div>
+        </Wrapper>
     )
 }
 
-export default League;
+export default Main;
