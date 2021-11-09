@@ -56,8 +56,7 @@ a{
 
 table{
   margin: 0 auto;
-  width: 100%;
-  font-size: 8px;
+  width: 98%;
 }
 td{
   padding: 5px 0px;
@@ -155,21 +154,18 @@ button.navbar-toggler{
 
 @media only screen and (min-width: 359px) {
   table{
-    font-size: 10px;
+    font-size: 14px;
   }
   td{
     max-width: 50px;
   }
   th{
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 
 @media only screen and (min-width: 599px) {
-  table{
-    font-size: 12px;
-    width: 100%;
-  }
+
   td{
     min-width: 70px;
     max-width: 90px;
@@ -205,7 +201,7 @@ button.navbar-toggler{
 
 @media only screen and (min-width: 1023px) {
   table{
-    width: 50%;
+    max-width: 50%;
   }
   .nav-link{
     margin: 5px 0px 5px 40px;

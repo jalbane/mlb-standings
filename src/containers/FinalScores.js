@@ -1,80 +1,83 @@
 
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import DisplayGame from '../components/DisplayGame';
 
 function FinalScores(){
     const [completeGameRecap, setCompleteGameRecap] = useState()
-    const [filteredGameRecap, setFilteredGameRecap] = useState()
     const [loading, setLoading] = useState(true)
-
+    const [legend, setLegend] = useState()
+    const [pageNumber, setPageNumber] = useState(0)
+    let maxPages = useRef(null)
     useEffect( () => {
         let results = []
-        fetch(`https://api-mlb.herokuapp.com/regular-season`, {
+        fetch(`https://api-mlb.herokuapp.com/regular-season/page?number=${pageNumber}`, {
             method: 'GET',
             accept: "*/*"
         })
         .then(res => res.json())
         .then(data => {
-            results = data.map( (item)=> <DisplayGame 
-                key = {item._id}
-                date = {item.date}
-                stadium = {item.stadium}
-                winner = {item.winner.name}
-                winnerRuns = {item.winner.runs}
-                loser = {item.loser.name}
-                loserRuns = {item.loser.runs}
-            />)
+            results = data.result.map( (item, index)=> {return {
+                key: index,
+                date: item.date,
+                stadium: item.stadium,
+                winner: item.winner.name,
+                winnerRuns: item.winner.runs,
+                loser: item.loser.name,
+                loserRuns: item.loser.runs
+            }
+            })
+            maxPages.current = data.pages
             setCompleteGameRecap(Array.from(results))
+            setLegend(Array.from(results))
             setLoading(false)
-            
         })
-        
-    },[])
+    },[pageNumber])
 
     const handleSearch = (e) => {
-        setFilteredGameRecap(completeGameRecap)
-        let [date, stadium, winner, winnerRuns, loser, loserRuns] = Object.keys(completeGameRecap[0].props)
-        let tempData = completeGameRecap.filter( item => {
-            if (item.props[winner].toLowerCase().includes(e.target.value.toLowerCase()) 
-                || item.props[loser].toLowerCase().includes(e.target.value.toLowerCase())
-                || item.props[date].includes(e.target.value.toLowerCase())
-                || item.props[stadium].toLowerCase().includes(e.target.value.toLowerCase())
+        if (e.target.value !== ""){
+            let tempData = legend.filter( (item, index) => {
+            if (item.winner.toLowerCase().includes(e.target.value.toLowerCase()) 
+                || item.loser.toLowerCase().includes(e.target.value.toLowerCase())
+                || item.stadium.toLowerCase().includes(e.target.value.toLowerCase())
+                || item.date.toLowerCase().includes(e.target.value.toLowerCase())
             ){
-                return (
-                    <DisplayGame 
-                        key = {item.key}
-                        date = {item.props.date}
-                        stadium = {item.props.stadium}
-                        winner = {item.props.winner.name}
-                        winnerRuns = {item.props.winner.runs}
-                        loser = {item.props.loser.name}
-                        loserRuns = {item.props.loser.runs}/>
-                )
+                return {
+                        key: index,
+                        date: item.date,
+                        stadium: item.stadium,
+                        winner: item.winner.name,
+                        winnerRuns: item.winner.runs,
+                        loser: item.loser.name,
+                        loserRuns: item.loser.runs
+                }
             }
-        })
-        setFilteredGameRecap(tempData)
+            })
+            return setCompleteGameRecap(tempData)
+        }
+        else 
+            return setCompleteGameRecap(legend)
+        
     }
 
     return(
         <div>
-            {loading
-                ?<div> loading </div> 
-                : filteredGameRecap 
-                    ?    
-                    <div >   
-                        <input onChange = {handleSearch} placeholder="Search for teams, stadiums or dates (mm-dd)"/>
-                        <div className = "layout-container"> 
-                            {filteredGameRecap} 
-                        </div> 
-                    </div>
-                    :
+            { loading
+                ? <div> loading </div> 
+                : 
                     <div >   
                         <input onChange = {handleSearch} placeholder="Search for Teams, Stadiums or dates (mm-dd)"/>
+                        <div>
+                            <button onClick={() => pageNumber ? setPageNumber(  prevState => prevState - 1 ): 0 }> <strong> Go back </strong> </button>
+                            <div style={{display: 'inline-block', paddingLeft: "75px", paddingRight: "75px"}}> Page {pageNumber + 1} out of {maxPages.current + 1} </div>
+                            <button onClick={() => pageNumber === maxPages.current? null : setPageNumber(prevState => prevState + 1)}> <strong> Next page </strong> </button>
+                        </div>
                         <div className = "layout-container"> 
-                            {completeGameRecap} 
+                            {completeGameRecap.map( (item, index) => <DisplayGame key={index} props={item} /> ) }
                         </div> 
                     </div>
             }
+            
+            
         </div>
     )
 }
