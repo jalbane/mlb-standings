@@ -2,7 +2,6 @@ import React from 'react';
 
 function DisplayTeam(props){
 
-
     let fixedGamesBack = props.gamesBack.toFixed(1)
     return (
         <tr>
@@ -14,7 +13,6 @@ function DisplayTeam(props){
             <td>{props.streak}</td>
         </tr>
         )
-    
 }
 
 export default DisplayTeam;

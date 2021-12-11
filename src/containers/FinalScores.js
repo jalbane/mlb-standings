@@ -34,29 +34,22 @@ function FinalScores(){
     },[pageNumber])
 
     const handleSearch = (e) => {
-        if (e.target.value !== ""){
-            let tempData = legend.filter( (item, index) => {
-            if (item.winner.toLowerCase().includes(e.target.value.toLowerCase()) 
-                || item.loser.toLowerCase().includes(e.target.value.toLowerCase())
-                || item.stadium.toLowerCase().includes(e.target.value.toLowerCase())
-                || item.date.toLowerCase().includes(e.target.value.toLowerCase())
-            ){
-                return {
-                        key: index,
-                        date: item.date,
-                        stadium: item.stadium,
-                        winner: item.winner.name,
-                        winnerRuns: item.winner.runs,
-                        loser: item.loser.name,
-                        loserRuns: item.loser.runs
-                }
-            }
+        if (e.target.value){
+            let tempData = legend.filter( (item) => {
+                if (item.winner.toLowerCase().includes(e.target.value.toLowerCase()) 
+                    || item.loser.toLowerCase().includes(e.target.value.toLowerCase())
+                    || item.stadium.toLowerCase().includes(e.target.value.toLowerCase())
+                    || item.date.toLowerCase().includes(e.target.value.toLowerCase())
+                )
+                    return item
+                else 
+                    return null;
             })
             return setCompleteGameRecap(tempData)
+            
         }
-        else 
-            return setCompleteGameRecap(legend)
         
+        return setCompleteGameRecap(legend)
     }
 
     return(
@@ -66,14 +59,14 @@ function FinalScores(){
                 : 
                     <div >   
                         <input onChange = {handleSearch} placeholder="Search for Teams, Stadiums or dates (mm-dd)"/>
-                        <div>
-                            <button onClick={() => pageNumber ? setPageNumber(  prevState => prevState - 1 ): 0 }> <strong> Go back </strong> </button>
-                            <div style={{display: 'inline-block', paddingLeft: "75px", paddingRight: "75px"}}> Page {pageNumber + 1} out of {maxPages.current + 1} </div>
-                            <button onClick={() => pageNumber === maxPages.current? null : setPageNumber(prevState => prevState + 1)}> <strong> Next page </strong> </button>
-                        </div>
                         <div className = "layout-container"> 
                             {completeGameRecap.map( (item, index) => <DisplayGame key={index} props={item} /> ) }
-                        </div> 
+                        </div>                         
+                        <div className="page-bar">
+                            <button onClick={() => pageNumber ? setPageNumber(  prevState => prevState - 1 ): 0 }> <strong> Go back </strong> </button>
+                            <div className="page-number"> Page {pageNumber + 1} out of {maxPages.current + 1} </div>
+                            <button onClick={() => pageNumber === maxPages.current? null : setPageNumber(prevState => prevState + 1)}> <strong> Next page </strong> </button>
+                        </div>
                     </div>
             }
             

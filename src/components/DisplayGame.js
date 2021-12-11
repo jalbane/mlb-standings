@@ -9,13 +9,15 @@ function CompletedGames( {props} ){
                 <div> {props.stadium} </div>
                 <div> {rest.join('/').concat('/', formatDate)} </div>
             </div>
-            <div className = "winner-container"> 
-                <strong> {props.winner} 
-                    <div> {props.winnerRuns} </div>
-                </strong>
+            <div className = "info-container"> 
+                <div className="left"> {props.winner}</div>
+                <div> vs </div>
+                <div className="right"> {props.loser}  </div> 
             </div>
-            <div className = "loser-container"> {props.loser} 
-                <div> {props.loserRuns} </div>
+            <div className = "info-container">
+                <div className="left"> {props.winnerRuns} </div> 
+                <div> - </div>
+                <div className="right"> {props.loserRuns} </div>
             </div>
         </div>
     )

@@ -3,6 +3,7 @@ import DisplayTeam from '../components/DisplayTeam';
 import { AiFillCaretUp, AiFillCaretDown} from "react-icons/ai";
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
+import YearSelection from '../components/YearSelection/YearSelection';
 
 const Wrapper = styled.div`
     margin: 0 auto;
@@ -43,14 +44,14 @@ function Main(){
         american: {    
             pct: true,
             gamesBack: true,
-            wins: false,
+            wins: true,
             losses: true,
             team: false
         },
         national: {    
             pct: true,
             gamesBack: true,
-            wins: false,
+            wins: true,
             losses: true,
             team: false
         }
@@ -65,18 +66,19 @@ function Main(){
         })
         .then(res => res.json())
         .then(data => {
+            console.log(data)
             results = data.map(  (item) => 
                 <DisplayTeam 
                     key = {item.teamId}
                     teamId = {item.teamId} 
                     team = {item.team} 
                     league = {item.league}
-                    record = {item.summary.record}
-                    wins = {item.summary.wins}
-                    losses = {item.summary.losses}
-                    pct = {item.summary.pct}
-                    gamesBack = {item.summary.gamesBack}
-                    streak = {item.summary.streak}
+                    record = {item.record}
+                    wins = {item.wins}
+                    losses = {item.losses}
+                    pct = {item.pct}
+                    gamesBack = {item.gamesBack}
+                    streak = {item.streak}
                 />)
             results = results.sort( (a,b) => {return a.props.league - b.props.league} )
             let resultsAmerican = results.slice(0, 15)
@@ -89,7 +91,7 @@ function Main(){
         })
     },[])
 
-    function mapStateToDummyComponent(state, league){
+    function mapTeamState(state, league){
         state = state.map((item) => 
         <DisplayTeam 
             key = {item.props.teamId}
@@ -117,6 +119,12 @@ function Main(){
         }
     }
 
+    /**
+     * reorganizeWins handles sorting for # of wins and win percentage,
+     * because they are closely related. Also sorting wins in descending order
+     * will toggle the state for # of losses to display in ascending order. 
+     * @param {*} league -- string for either american or national league
+     */
     function reorganizeWins(league){
         let state = [...teams[`${league}`]]
         state = state.sort( (a,b) => {
@@ -130,11 +138,13 @@ function Main(){
             [`${league}`]:
             {
                 ...prevState[`${league}`],
-                wins: !prevState[`${league}`].wins
+                wins: !prevState[`${league}`].wins,
+                losses: !prevState[`${league}`].losses,
+                gamesBack: !prevState[`${league}`].gamesBack
             }
         }))
 
-        mapStateToDummyComponent(state, league)
+        mapTeamState(state, league)
     }
 
     function reorganizeLosses(league){
@@ -150,11 +160,13 @@ function Main(){
             [`${league}`]:
             {
                 ...prevState[`${league}`],
-                losses: !prevState[`${league}`].losses
+                losses: !prevState[`${league}`].losses,
+                wins: prevState[`${league}`].losses,
+                pct: prevState[`${league}`].losses
             }
         }))
 
-        mapStateToDummyComponent(state, league)
+        mapTeamState(state, league)
     }
     
     function reorganizeWinPercentage(league){
@@ -170,10 +182,12 @@ function Main(){
             [`${league}`]:
             {
                 ...prevState[`${league}`],
-                pct: !prevState[`${league}`].pct
+                pct: !prevState[`${league}`].pct,
+                losses: !prevState[`${league}`].losses,
+                gamesBack: !prevState[`${league}`].gamesBack
             }
         }))
-        mapStateToDummyComponent(state, league)
+        mapTeamState(state, league)
     }
 
     function reorganizeGamesBack(league){
@@ -189,10 +203,12 @@ function Main(){
             [`${league}`]:
             {
                 ...prevState[`${league}`],
-                gamesBack: !prevState[`${league}`].gamesBack
+                gamesBack: !prevState[`${league}`].gamesBack,
+                wins: prevState[`${league}`].gamesBack,
+                pct: prevState[`${league}`].gamesBack
             }
         }))
-        mapStateToDummyComponent(state, league)
+        mapTeamState(state, league)
     }
 
     function reorganizeAlpha(league){
@@ -214,7 +230,7 @@ function Main(){
             }
         }))
         
-        mapStateToDummyComponent(state, league)
+        mapTeamState(state, league)
     }
 
     return( 
@@ -223,6 +239,7 @@ function Main(){
             ? <div style={{marginTop: '5%'}}> Loading <Loader color={'black'} height={60}/></div>
             :
             <div>
+                <YearSelection />
                 <table>
                     <thead>
                         <tr>
