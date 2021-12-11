@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/mlb-standings/static/css/main.5f7504f2.chunk.css",
-    "main.js": "/mlb-standings/static/js/main.4522c4cc.chunk.js",
-    "main.js.map": "/mlb-standings/static/js/main.4522c4cc.chunk.js.map",
+    "main.js": "/mlb-standings/static/js/main.a1aa7a8f.chunk.js",
+    "main.js.map": "/mlb-standings/static/js/main.a1aa7a8f.chunk.js.map",
     "runtime-main.js": "/mlb-standings/static/js/runtime-main.d50f2c26.js",
     "runtime-main.js.map": "/mlb-standings/static/js/runtime-main.d50f2c26.js.map",
     "static/js/2.545b1a8c.chunk.js": "/mlb-standings/static/js/2.545b1a8c.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.d50f2c26.js",
     "static/js/2.545b1a8c.chunk.js",
     "static/css/main.5f7504f2.chunk.css",
-    "static/js/main.4522c4cc.chunk.js"
+    "static/js/main.a1aa7a8f.chunk.js"
   ]
 }
