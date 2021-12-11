@@ -1,0 +1,5 @@
+#year-input > input{
+    min-width: 100px;
+    width: 5%;
+    margin: 0px 5px;
+}

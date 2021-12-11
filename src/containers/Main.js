@@ -7,8 +7,8 @@ import YearSelection from '../components/YearSelection/YearSelection';
 
 const Wrapper = styled.div`
     margin: 0 auto;
-    padding-top: 2%;
-    padding-bottom: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
 
     & table {
         margin-top: 0px;
@@ -16,7 +16,7 @@ const Wrapper = styled.div`
     }
 
     & table:nth-child(2){
-        margin-top: 2%;
+        margin-top: 1%;
     }
 
     & table > thead > tr > th{
@@ -58,11 +58,12 @@ function Main(){
 
     })
     const [loading, setLoading] = useState(true)
+    const [queryYear, setQueryYear] = useState(Number(2021))
     useEffect( () => {
         let results
-        fetch(`https://api-mlb.herokuapp.com/`, {
-            method: 'GET',
-            accept: "*/*"
+        /* `https://api-mlb.herokuapp.com/` */
+        fetch(`https://api-mlb.herokuapp.com/?season=${queryYear}`, {
+            method: 'GET'
         })
         .then(res => res.json())
         .then(data => {
@@ -89,7 +90,12 @@ function Main(){
             })
             setLoading(false)
         })
-    },[])
+        .catch(err => {
+            if (err){
+                setLoading(false)
+            }
+        })
+    },[queryYear])
 
     function mapTeamState(state, league){
         state = state.map((item) => 
@@ -239,7 +245,7 @@ function Main(){
             ? <div style={{marginTop: '5%'}}> Loading <Loader color={'black'} height={60}/></div>
             :
             <div>
-                {/*<YearSelection />*/}
+                <YearSelection setQueryYear={setQueryYear}/>
                 <table>
                     <thead>
                         <tr>
