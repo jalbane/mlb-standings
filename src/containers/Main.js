@@ -239,7 +239,7 @@ function Main(){
             ? <div style={{marginTop: '5%'}}> Loading <Loader color={'black'} height={60}/></div>
             :
             <div>
-                <YearSelection />
+                {/*<YearSelection />*/}
                 <table>
                     <thead>
                         <tr>
