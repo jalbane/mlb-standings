@@ -9,12 +9,12 @@ export default function App(props) {
 
   let initTeamState = props.addFranchise;
   useEffect(() => {
-    fetch(`https://api-mlb.herokuapp.com?season=2021`)
+    fetch(`https://api-mlb.herokuapp.com?season=2022`)
       .then((res) => res.json())
       .then((data) => {
         initTeamState(data);
       });
-  });
+  }, []);
 
   function handleDate(e) {
     e.preventDefault();
