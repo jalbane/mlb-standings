@@ -14,7 +14,7 @@ export default function App(props) {
       .then((data) => {
         initTeamState(data);
       });
-  }, []);
+  });
 
   function handleDate(e) {
     e.preventDefault();
@@ -57,7 +57,7 @@ export default function App(props) {
   function generateOutput() {
     let output = props.Games.map((item, i) => {
       if (item.winner === "" || item.loser === "")
-        return 
+        return null
 
       let [printInterLeagueValue, printDivisionRivalValue] = matchUpFunc(item.winner,item.loser);
       
