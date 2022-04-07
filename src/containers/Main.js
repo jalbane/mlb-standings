@@ -58,7 +58,7 @@ function Main(){
 
     })
     const [loading, setLoading] = useState(true)
-    const [queryYear, setQueryYear] = useState(Number(2021))
+    const [queryYear, setQueryYear] = useState(new Date().getFullYear())
     useEffect( () => {
         let results
         /* `https://api-mlb.herokuapp.com/` */
