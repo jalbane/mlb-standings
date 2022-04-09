@@ -51,12 +51,12 @@ function GamesForm(props){
                                 </datalist>
                         </label>
                         <label> Score
-                            <input type="text" onChange = {(e)=> props.setWinnerRuns(e.target.value, Index)}></input>
+                            <input type="text" value={i?.winnerRuns} onChange = {(e)=> props.setWinnerRuns(e.target.value, Index)}></input>
                             -
-                            <input type="text" onChange = {(e)=> props.setLoserRuns(e.target.value, Index)}></input>
+                            <input type="text" value={i?.loserRuns} onChange = {(e)=> props.setLoserRuns(e.target.value, Index)}></input>
                         </label>
                         <label> Venue
-                            <select name = "venue" id ="venue" defaultValue="" onChange = {(e)=> props.setVenue(e.target.value, Index)}>
+                            <select name = "venue" id ="venue" defaultValue={i?.venue} onChange = {(e)=> props.setVenue(e.target.value, Index)}>
                                 <option hidden></option>
                                 <option> American Family Field </option>
                                 <option> Angel Stadium </option>

@@ -33,6 +33,7 @@ const SWAP_MATCHUP = (i) => {
 }
 
 const SET_WINNER_INFO = (winner, i) => {
+    console.log(winner, i)
     return {
         type: 'SET_WINNER_INFO',
         payload: winner,
