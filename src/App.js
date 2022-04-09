@@ -1,7 +1,7 @@
 import './App.css';
 import Main from './containers/Main.js';
 import {HashRouter, Switch, Link, Route} from "react-router-dom";
-import FinalScores from './containers/FinalScores.js';
+import GamesContainer from './containers/GamesContainer.js';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import App2 from './App2';
@@ -30,7 +30,7 @@ function App() {
             <Main />
           </Route>
           <Route path = "/games">
-            <FinalScores />
+            <GamesContainer />
           </Route>
           <Route path = "/admin">
             <Provider store={store}>

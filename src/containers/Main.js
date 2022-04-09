@@ -278,7 +278,7 @@ function Main() {
                 </div>
             ) : (
                 <div>
-                    <YearSelection setQueryYear={setQueryYear} />
+                    <YearSelection setQueryYear={setQueryYear} queryYear={queryYear}/>
                     <table>
                         <thead>
                             <tr>

@@ -1,7 +1,7 @@
 import React from "react";
 import './YearSelection.css'
 
-export default function YearSelection(props) {
+export default function YearSelection({setQueryYear, queryYear}) {
   let date = new Date();
   return (
     <div id="year-input">
@@ -9,11 +9,10 @@ export default function YearSelection(props) {
       <input
         type="number"
         data-testid="year-select"
-        defaultValue={Number(date.getFullYear())}
         min={Number(2021)}
-        
+        value={queryYear}
         max={Number(date.getFullYear())}
-        onChange={(e) => props.setQueryYear(e.target.value)}
+        onChange={(e) => setQueryYear(e.target.value)}
       ></input>
     </div>
   );
