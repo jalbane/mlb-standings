@@ -1,6 +1,6 @@
 import './App.css';
 import Main from './containers/Main.js';
-import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Link, Route } from "react-router-dom";
 import FinalScores from './containers/FinalScores.js';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -18,7 +18,7 @@ function App() {
     <div className="App">
       {/* <TestContextOutsideOfProvider /> */}
       <QueryYearContext>
-        <Router basename="/mlb-standings">
+        <Router basename="/">
           <Navbar expand="xxl" bg="light">
             <Navbar.Toggle />
             <Navbar.Collapse className="nav-collapse">
