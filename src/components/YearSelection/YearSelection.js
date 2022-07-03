@@ -11,7 +11,7 @@ export default function YearSelection({queryYear, setQueryYear}) {
         data-testid="year-select"
         defaultValue={queryYear}
         min={Number(2021)}
-        
+        value={queryYear}
         max={Number(date.getFullYear())}
         onChange={(e) => setQueryYear(e.target.value)}
       ></input>

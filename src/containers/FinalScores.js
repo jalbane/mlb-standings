@@ -16,7 +16,7 @@ function FinalScores(){
         let results = []
         fetch(`https://api-mlb.herokuapp.com/regular-season/page?number=${pageNumber}&season=${queryYear}`, {
             method: 'GET',
-            accept: "*/*"
+            //accept: "*/*"
         })
         .then(res => res.json())
         .then(data => {
@@ -57,6 +57,9 @@ function FinalScores(){
     }
 
     return(
+        // <Page>
+        //     <Games />
+        // </Page>
         <div>
             { loading
                 ? <div> loading </div> 
