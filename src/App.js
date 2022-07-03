@@ -18,7 +18,7 @@ function App() {
     <div className="App">
       {/* <TestContextOutsideOfProvider /> */}
       <QueryYearContext>
-        <Router basename="/">
+        <Router basename="/mlb-standings">
           <Navbar expand="xxl" bg="light">
             <Navbar.Toggle />
             <Navbar.Collapse className="nav-collapse">
