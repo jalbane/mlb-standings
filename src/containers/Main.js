@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import DisplayTeam from '../components/DisplayTeam'
-import { AiFillCaretUp, AiFillCaretDown } from 'react-icons/ai'
-import Loader from 'react-loader-spinner'
-import styled from 'styled-components'
-import YearSelection from '../components/YearSelection/YearSelection'
-import axios from 'axios'
+import React,{useState, useEffect} from 'react';
+import DisplayTeam from '../components/DisplayTeam';
+import { AiFillCaretUp, AiFillCaretDown} from "react-icons/ai";
+import Loader from 'react-loader-spinner';
+import styled from 'styled-components';
+import YearSelection from '../components/YearSelection/YearSelection';
+import { useQueryYearContext } from '../contexts/queryYearContext';
 
 const Wrapper = styled.div`
     margin: 0 auto;
@@ -53,8 +53,13 @@ function Main() {
         }
     })
     const [loading, setLoading] = useState(true)
+<<<<<<< HEAD
+    const [queryYear, setQueryYear] = useQueryYearContext()
+    useEffect( () => {
+=======
     const [queryYear, setQueryYear] = useState(new Date().getFullYear())
     useEffect(() => {
+>>>>>>> c7f272f04e0e19aa9d51e28a32b0c4eaa12afd61
         let results
         const controller = new AbortController()
 
@@ -269,6 +274,49 @@ function Main() {
         mapTeamState(state, league)
     }
 
+<<<<<<< HEAD
+    return( 
+        <Wrapper> 
+            {loading 
+            ? <div style={{marginTop: '5%'}}> Loading <Loader color={'black'} height={60}/></div>
+            :
+            <div>
+                <YearSelection queryYear={queryYear} setQueryYear={setQueryYear}/>
+                <table>
+                    <thead>
+                        <tr>
+                            <th colSpan="6">American League</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Team<button onClick={() => reorganizeAlpha("american")}>{sortDirection.american.team ? <AiFillCaretUp />: <AiFillCaretDown />  } </button></td>
+                            <td>Wins <button onClick ={() => reorganizeWins("american")}> {sortDirection.american.wins ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Losses <button onClick ={() => reorganizeLosses("american")}> {sortDirection.american.losses ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Win % <button onClick ={() => reorganizeWinPercentage("american")}> {sortDirection.american.pct ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Games Back <button onClick ={() => reorganizeGamesBack("american")}> {sortDirection.american.gamesBack ? <AiFillCaretUp />: <AiFillCaretDown />  }</button> </td>
+                            <td>Streak</td>
+                        </tr>
+                        {teams.american}
+                    </tbody>
+                </table>
+                <table>
+                    <thead><tr><th colSpan="6">National League</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>Team<button onClick={() => reorganizeAlpha("national")}>{sortDirection.national.team ? <AiFillCaretUp />: <AiFillCaretDown />  } </button></td>
+                            <td>Wins <button onClick ={() => reorganizeWins("national")}> {sortDirection.national.wins ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Losses <button onClick ={() => reorganizeLosses("national")}> {sortDirection.national.losses ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Win % <button onClick ={() => reorganizeWinPercentage("national")}> {sortDirection.national.pct ? <AiFillCaretUp />: <AiFillCaretDown />  }</button></td>
+                            <td>Games Back <button onClick ={() => reorganizeGamesBack("national")}> {sortDirection.national.gamesBack ? <AiFillCaretUp />: <AiFillCaretDown />  }</button> </td>
+                            <td>Streak</td>
+                        </tr>
+                        {teams.national}
+                    </tbody>
+                </table>
+            </div>
+            }   
+=======
     return (
         <Wrapper>
             {loading ? (
@@ -415,6 +463,7 @@ function Main() {
                     </table>
                 </div>
             )}
+>>>>>>> c7f272f04e0e19aa9d51e28a32b0c4eaa12afd61
         </Wrapper>
     )
 }
