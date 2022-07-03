@@ -1,16 +1,20 @@
 
 import React, {useState, useEffect, useRef} from 'react';
 import DisplayGame from '../components/DisplayGame';
+import YearSelection from '../components/YearSelection/YearSelection';
+import { useQueryYearContext } from '../contexts/queryYearContext';
 
 function FinalScores(){
     const [completeGameRecap, setCompleteGameRecap] = useState()
     const [loading, setLoading] = useState(true)
     const [legend, setLegend] = useState()
     const [pageNumber, setPageNumber] = useState(0)
+    const [queryYear, setQueryYear] = useQueryYearContext()
+
     let maxPages = useRef(null)
     useEffect( () => {
         let results = []
-        fetch(`https://api-mlb.herokuapp.com/regular-season/page?number=${pageNumber}`, {
+        fetch(`https://api-mlb.herokuapp.com/regular-season/page?number=${pageNumber}&season=${queryYear}`, {
             method: 'GET',
             accept: "*/*"
         })
@@ -31,7 +35,7 @@ function FinalScores(){
             setLegend(Array.from(results))
             setLoading(false)
         })
-    },[pageNumber])
+    },[pageNumber, queryYear])
 
     const handleSearch = (e) => {
         if (e.target.value){
@@ -58,6 +62,7 @@ function FinalScores(){
                 ? <div> loading </div> 
                 : 
                     <div >   
+                        <YearSelection queryYear={queryYear} setQueryYear={setQueryYear}/>
                         <input onChange = {handleSearch} placeholder="Search for Teams, Stadiums or dates (mm-dd)"/>
                         <div className = "layout-container"> 
                             {completeGameRecap.map( (item, index) => <DisplayGame key={index} props={item} /> ) }

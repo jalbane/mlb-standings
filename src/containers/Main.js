@@ -4,6 +4,7 @@ import { AiFillCaretUp, AiFillCaretDown} from "react-icons/ai";
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 import YearSelection from '../components/YearSelection/YearSelection';
+import { useQueryYearContext } from '../contexts/queryYearContext';
 
 const Wrapper = styled.div`
     margin: 0 auto;
@@ -58,7 +59,7 @@ function Main(){
 
     })
     const [loading, setLoading] = useState(true)
-    const [queryYear, setQueryYear] = useState(new Date().getFullYear())
+    const [queryYear, setQueryYear] = useQueryYearContext()
     useEffect( () => {
         let results
         /* `https://api-mlb.herokuapp.com/` */
@@ -245,7 +246,7 @@ function Main(){
             ? <div style={{marginTop: '5%'}}> Loading <Loader color={'black'} height={60}/></div>
             :
             <div>
-                <YearSelection setQueryYear={setQueryYear}/>
+                <YearSelection queryYear={queryYear} setQueryYear={setQueryYear}/>
                 <table>
                     <thead>
                         <tr>
