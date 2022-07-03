@@ -5,6 +5,7 @@ import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 import YearSelection from '../components/YearSelection/YearSelection';
 import { useQueryYearContext } from '../contexts/queryYearContext';
+import axios from 'axios'
 
 const Wrapper = styled.div`
     margin: 0 auto;
