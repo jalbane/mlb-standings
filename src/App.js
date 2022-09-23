@@ -8,6 +8,8 @@ import App2 from './App2';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
 import { rootReducer } from './reducers/RootReducer.js';
+import QueryYearContext from './contexts/queryYearContext';
+import TestContextOutsideOfProvider from './containers/TestContextOutsideOfProvider';
 import GameDetails from './containers/GameDetails';
 
 export const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
@@ -17,14 +19,14 @@ function App() {
     <div className="App">
       <Router basename ="/">
           <Navbar expand="xxl" bg="light">
-            <Navbar.Toggle/>
+            <Navbar.Toggle />
             <Navbar.Collapse className="nav-collapse">
-            <Nav>
-              <Nav.Link as = {Link} to = "/"> Standings </Nav.Link>
-              <Nav.Link as = {Link} to = "/games"> Final Scores </Nav.Link>
-            </Nav>
+              <Nav>
+                <Nav.Link as={Link} to="/"> Standings </Nav.Link>
+                <Nav.Link as={Link} to="/games"> Final Scores </Nav.Link>
+              </Nav>
             </Navbar.Collapse>
-            
+
           </Navbar>
         <Switch>
           <Route exact path = "/">

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import DisplayTeam from '../components/DisplayTeam'
-import { AiFillCaretUp, AiFillCaretDown } from 'react-icons/ai'
-import Loader from 'react-loader-spinner'
-import styled from 'styled-components'
-import YearSelection from '../components/YearSelection/YearSelection'
+import React,{useState, useEffect} from 'react';
+import DisplayTeam from '../components/DisplayTeam';
+import { AiFillCaretUp, AiFillCaretDown} from "react-icons/ai";
+import Loader from 'react-loader-spinner';
+import styled from 'styled-components';
+import YearSelection from '../components/YearSelection/YearSelection';
+import { useQueryYearContext } from '../contexts/queryYearContext';
 import axios from 'axios'
 
 const Wrapper = styled.div`
@@ -68,8 +69,8 @@ function Main() {
         }
     })
     const [loading, setLoading] = useState(true)
-    const [queryYear, setQueryYear] = useState(new Date().getFullYear())
-    useEffect(() => {
+    const [queryYear, setQueryYear] = useQueryYearContext()
+    useEffect( () => {
         let results
         const controller = new AbortController()
 
