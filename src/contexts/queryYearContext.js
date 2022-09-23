@@ -14,11 +14,11 @@ export const useQueryYearContext = () => {
 
 
 const QueryYearContext = ({ children }) => {
-    const { queryYear, setQueryYear } = useQueryYear()
-
+    const { Year, setQueryYear } = useQueryYear()
+    console.log(Year)
     const values = React.useMemo(() => {
-        return [queryYear, setQueryYear]
-    }, [queryYear, setQueryYear])
+        return {Year, setQueryYear}
+    }, [Year, setQueryYear])
 
     return <YearContext.Provider value={values}>{children}</YearContext.Provider>
 }

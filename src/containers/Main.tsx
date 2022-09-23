@@ -69,7 +69,9 @@ function Main() {
         }
     })
     const [loading, setLoading] = useState(true)
-    const [queryYear, setQueryYear] = useQueryYearContext()
+    const { Year } = useQueryYearContext()
+    console.log(Year)
+    const [queryYear, setQueryYear] = useState(Year)
     useEffect( () => {
         let results
         const controller = new AbortController()

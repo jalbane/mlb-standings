@@ -7,7 +7,7 @@ export default function YearSelection({queryYear, setQueryYear}) {
     <div id="year-input">
       <label htmlFor="year-input">Select year</label>
       <input
-        type="number"
+        type="date"
         data-testid="year-select"
         defaultValue={queryYear}
         min={Number(2021)}

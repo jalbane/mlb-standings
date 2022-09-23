@@ -29,6 +29,7 @@ function App() {
 
           </Navbar>
         <Switch>
+        <QueryYearContext>
           <Route exact path = "/">
             <Main />
           </Route>
@@ -43,6 +44,7 @@ function App() {
           <Route path='/game/:id'>
             <GameDetails />
           </Route>
+        </QueryYearContext>
         </Switch>
       </Router>
     </div>
