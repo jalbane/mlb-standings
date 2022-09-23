@@ -1,13 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function CompletedGames( {props} ){
     let [formatDate, ...rest] = props.date.split('T')[0].split('-')
-
     return (
         <div className = "game-container">
             <div className = "stadium-date-container">   
                 <div> {props.stadium} </div>
-                <div> {rest.join('/').concat('/', formatDate)} </div>
+                <Link to={`/game/${props.id}`}><div className='date-link'> {rest.join('/').concat('/', formatDate)} </div></Link>
             </div>
             <div className = "info-container"> 
                 <div className="left"> {props.winner}</div>

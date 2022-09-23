@@ -31,6 +31,21 @@ const Wrapper = styled.div`
     }
 `
 
+export interface FranchiseInfo {
+    division?: string,
+    gamesBack: number,
+    league: number,
+    losses: number,
+    pct: number,
+    record: string,
+    season?: number,
+    streak?: string,
+    team: string,
+    teamId: number,
+    wins: number,
+    _id?: string
+}
+
 function Main() {
     const [teams, setTeams] = useState({
         american: [],
@@ -59,7 +74,7 @@ function Main() {
         const controller = new AbortController()
 
         /* `https://api-mlb.herokuapp.com/` */
-        // fetch(`https://api-mlb.herokuapp.com/?season=${queryYear}`, {
+        // fetch(`https://api-mlb.herokuapp.com/?season=${queryYear}`, { 
         //     method: 'GET'
         // })
         // .then(res => res.json())
@@ -99,7 +114,7 @@ function Main() {
                 signal: controller.signal
             })
             if (response.status === 200) {
-                results = response.data.map(item => (
+                results = response.data.map( (item:FranchiseInfo) => (
                     <DisplayTeam
                         key={item.teamId}
                         teamId={item.teamId}
@@ -274,7 +289,7 @@ function Main() {
             {loading ? (
                 <div style={{ marginTop: '5%' }}>
                     {' '}
-                    Loading <Loader color={'black'} height={60} />
+                    Loading <Loader color={'black'} height={60} type={'Audio'} />
                 </div>
             ) : (
                 <div>
@@ -282,7 +297,7 @@ function Main() {
                     <table>
                         <thead>
                             <tr>
-                                <th colSpan="6">American League</th>
+                                <th colSpan={6}>American League</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -349,7 +364,7 @@ function Main() {
                     <table>
                         <thead>
                             <tr>
-                                <th colSpan="6">National League</th>
+                                <th colSpan={6}>National League</th>
                             </tr>
                         </thead>
                         <tbody>

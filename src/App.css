@@ -128,10 +128,21 @@ h3{
 .stadium-date-container > div:first-child{
   float: left;
   display: inline;
+
 }
 .stadium-date-container > div:nth-child(2){
   display: inline;
-  float: right;
+  float: right; 
+}
+
+.date-link{
+  text-decoration: none;
+  color: black;
+  display: inline;
+  float: right; 
+  font-weight: 400;
+  font-size: 16px;
+  padding-block: 5px;
 }
 
 .info-container{
