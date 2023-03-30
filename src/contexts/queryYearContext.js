@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useQueryYear } from "../hooks";
 
 const YearContext = React.createContext()
+YearContext.displayName = "Year context"
 export const useQueryYearContext = () => {
     const context = useContext(YearContext)
     if (context === undefined) {

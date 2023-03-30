@@ -11,7 +11,7 @@ function GamesContainer() {
     const [loading, setLoading] = useState(true)
     const [legend, setLegend] = useState()
     const [pageNumber, setPageNumber] = useState(0)
-    const [queryYear, setQueryYear] = useState(new Date().getFullYear())
+    const [queryYear, setQueryYear] = useState(2022)
     let maxPages = useRef(null)
     useEffect(() => {
         let results = []
